@@ -6,7 +6,8 @@ const Image = (props) => {
     const { shape, src, size } = props
 
     const styles = {
-        src, size
+        src, 
+        size,
     }
 
     if (shape === 'circle') {
