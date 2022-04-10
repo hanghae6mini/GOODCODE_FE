@@ -1,15 +1,23 @@
 import React from "react";
-import {Browserrouter, Router, Link, Switch} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
+import { Grid } from "../elements";
 
-import logo from './logo.svg';
-import './App.css';
+import Login from "../components/Login";
+import signUp from "../components/SignUp";
 
 function App() {
   return (
     <React.Fragment>
-      
+      <BrowserRouter>
+        <Grid>
+          <Route path="/" exact component={Login}/>
+          <Route path="/signup" exact component={signUp}/>
+        </Grid>
+      </BrowserRouter>
     </React.Fragment>
   );
 }
 
 export default App;
+
+
