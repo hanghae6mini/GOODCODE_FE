@@ -6,6 +6,7 @@ import SignUp from "./pages/SignUp";
 import { Provider } from "react-redux";
 
 import store from "./redux/configStore";
+// 가짜 import
 
 
 function App() {
