@@ -1,12 +1,12 @@
 import React from "react";
 import {BrowserRouter, Route} from "react-router-dom";
-import { Grid } from "../elements/ls_index";
+import { Grid } from "./elements/ls_index";
 
-import Login from "../pages/Login";
-import SignUp from "../pages/SignUp";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 import { Provider } from "react-redux";
 
-import store from "../redux/configStore";
+import store from "./redux/configStore";
 
 function App() {
 
