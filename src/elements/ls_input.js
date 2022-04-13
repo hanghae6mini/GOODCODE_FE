@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {Text,Grid} from "../elements";
+import {Text,Grid} from "./ls_index";
 
 const Input = (props) => {
     const {label, placeholder, _onChange} = props;
@@ -15,16 +15,17 @@ const Input = (props) => {
 }
 
 Input.defaultProps = {
-    label: '텍스트',
+    label: null,
     placeholder: '텍스트를 입력하세요.',
     _onChange: () => {}
 }
 
 const ElInput = styled.input`
     border: 1px solid #212121;
-    width: 100%;
+    width: 300px;
     padding: 10px 4px;
     box-sizing: border-box;
+    background-color: skyblue;
 `;
 
 export default Input; 

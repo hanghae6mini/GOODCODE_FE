@@ -21,6 +21,8 @@ Text.defaultProps= {
 }
 
 const P = styled.p`
+    width: 120px;
+    text-align: center;
     color: ${(props) => props.color};
     font-size: ${(props) => props.size};
     font-weight: ${(props) => (props.bold? "600" : "400")};
