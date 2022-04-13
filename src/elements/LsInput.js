@@ -1,20 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import {Text,Grid} from "./ls_index";
+import LsGrid from "../elements/LsGrid"
+import LsText from "../elements/LsText"
 
-const ls_input = (props) => {
+const LsInput = (props) => {
     const {label, placeholder, _onChange} = props;
     return (
         <React.Fragment>
-            <Grid>
-                <Text margin="0px">{label}</Text>
+            <LsGrid>
+                <LsText margin="0px">{label}</LsText>
                 <ElInput placeholder={placeholder} onChange={_onChange}/>
-            </Grid>
+            </LsGrid>
         </React.Fragment>
     )
 }
 
-ls_input.defaultProps = {
+LsInput.defaultProps = {
     label: null,
     placeholder: '텍스트를 입력하세요.',
     _onChange: () => {}
@@ -28,4 +29,4 @@ const ElInput = styled.input`
     background-color: skyblue;
 `;
 
-export default ls_input; 
+export default LsInput; 
