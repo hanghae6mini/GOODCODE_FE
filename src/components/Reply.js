@@ -6,7 +6,7 @@ import { actionCreators as FeedActions } from "../redux/modules/feed";
 
 const Reply = ({ data }) => {
 
-    const repls = useSelector((state) => state.feed)
+    const repls = useSelector((state) => state.feed.repls)
 
     console.log(repls)
 
@@ -20,6 +20,10 @@ const Reply = ({ data }) => {
         dispatch(FeedActions.Add_CommentAX({ feedId: data.feedId, content: repl }))
     }
 
+    const delcomment = (com_id) => {
+        dispatch(FeedActions.del_commentAX(com_id))
+    }
+
     React.useEffect(() => {
         dispatch(FeedActions.get_commentAX({ feedId: data.feedId }))
     }, [])
@@ -31,17 +35,17 @@ const Reply = ({ data }) => {
                 <Button width='100px' margin='0 0 0 10px' _onClick={replcomment}>작성</Button>
             </Grid>
 
-            {data.repl_info ? data.repl_info.map((v, i) =>
+            {repls.map((v, i) =>
                 <div key={i} style={{ display: "flex", flexDirection: "row", marginTop: '10px' }}>
                     <Grid flex_space width='35vw' margin='10px auto'>
-                        <Text>{v.name}</Text>
-                        <Text>{v.repl}</Text>
+                        <Text>{v.nickname}</Text>
+                        <Text>{v.comment}</Text>
                     </Grid>
                     <Grid width='50px' margin='0 0 0 10px'>
-                        <Button width='40px' rad='20px'>X</Button>
+                        <Button width='40px' rad='20px' _onClick={e => delcomment(v.commentId)}>X</Button>
                     </Grid>
                 </div>
-            ) : null}
+            )}
 
         </Grid>
     )

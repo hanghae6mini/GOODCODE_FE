@@ -13,6 +13,7 @@ const DEL_POST = 'DEL_POST'
 
 const GET_COMMENT = 'GET_COMMENT'
 const ADD_COMMENT = 'ADD_COMMENT'
+const DEL_COMMENT = 'DEL_COMMENT'
 
 
 
@@ -23,8 +24,9 @@ const delPost = createAction(DEL_POST, (post) => ({ post }))
 
 const get_comment = createAction(GET_COMMENT, (comment) => comment)
 const add_comment = createAction(ADD_COMMENT, (comment) => comment)
+const del_comment = createAction(DEL_COMMENT, (comment) => comment)
 
-const testToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJna3J0anMyMDIwIiwibmlja25hbWUiOiLtlZnshKDsnokiLCJpYXQiOjE2NDk4MTQzMDYsImV4cCI6MTY0OTgxNzkwNiwiaXNzIjoiR09PRENPREUifQ.ppePQj95GR2fOGFDFwHlkmlKPRRXq7uog0AIJ3UuURs'
+const testToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJna3J0anMyMDIwIiwibmlja25hbWUiOiLtlZnshKDsnokiLCJpYXQiOjE2NDk4MzAzNTEsImV4cCI6MTY0OTgzMzk1MSwiaXNzIjoiR09PRENPREUifQ.uQQMwGIso_ytTimBIxgJX8fzqptpCZt24dp7Sjh-Oj0'
 
 const config = { 'Authorization': `Bearer ${testToken}` }
 
@@ -66,19 +68,22 @@ const addPostAX = (feed) => {
 
         const formData = new FormData();
 
-        formData.append('image', feed.image.file)
+        console.log(feed)
+
+        if (feed.image)
+            formData.append('image', feed.image.file)
         formData.append('userId', feed.userId)
         formData.append('content', feed.content)
 
         axios.post(`${initialState.baseURL}/api/feed`, formData, { headers: config })
             .then((res) => {
                 console.log(res)
+
+                dispatch(addPost(feed))
+                window.location.reload();
             }).catch((error) => {
                 console.log(error.response.data)
             })
-
-        // dispatch(addPost(feed))
-        window.location.reload();
 
         // dispatch(ImageActions.outPreview())
     }
@@ -108,7 +113,7 @@ const updatePostAX = (feed) => {
             })
 
         dispatch(updatePost(feed))
-        // window.location.reload();
+        window.location.reload();
 
         // dispatch(ImageActions.outPreview())
     }
@@ -137,19 +142,24 @@ const delPostAX = (feed_id) => {
 
 
 
+
+
+
 const get_commentAX = ({ feedId }) => {
     return async function (dispatch, getState, { history }) {
 
         console.log(feedId)
 
-        axios.get(`${initialState.baseURL}/api/feedcomment/?feedId=${feedId}`, { headers: config })
+        axios.get(`${initialState.baseURL}/api/feedcomment`,
+            {
+                headers: config,
+                params: { feedId: feedId }
+            })
             .then((res) => {
                 console.log(res)
                 dispatch(get_comment({ feedId, feed: res.data.result.feed }))
             }).catch((error) => {
                 console.log('data : ', error.response.data)
-
-                //     dispatch(get_comment())
             })
     }
 }
@@ -162,17 +172,38 @@ const Add_CommentAX = (data) => {
         const formData = new FormData()
 
         formData.append('comment', data.content)
-        formData.append('feedId', data.feedId)
+        // formData.append('feedId', data.feedId)
 
-        axios.post(`${initialState.baseURL}/api/feedcomment`, formData, { headers: config })
+        axios.post(`${initialState.baseURL}/api/feedcomment`, { comment: data.content },
+            {
+                headers: config,
+                params: { feedId: data.feedId }
+            })
             .then((res) => {
                 console.log(res)
-                // dispatch(add_comment(res))
+                dispatch(add_comment(data))
             }).catch((error) => {
                 console.log(error.response.data)
             })
 
         // dispatch(add_comment(data))
+    }
+}
+
+const del_commentAX = (commentId) => {
+    return function (dispatch, getState, { history }) {
+        console.log(commentId)
+
+        axios.delete(`${initialState.baseURL}/api/feedcomment`,
+            {
+                headers: config,
+                params: { commentId }
+            })
+            .then((res) => {
+                dispatch(del_comment(commentId))
+            }).catch((error) => {
+                console.log(error.response.data)
+            })
     }
 }
 
@@ -206,11 +237,7 @@ export default handleActions(
 
 
         [GET_COMMENT]: (state, action) => produce(state, (draft) => {
-            console.log(action.payload.feed)
-
-            let a = action.payload.feed.filter((v) => v.feedId === action.payload.feedId)
-
-            console.log(a)
+            draft.repls = action.payload.feed.filter((v) => v.feedId === action.payload.feedId + '')
         }),
         [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
             console.log(action.payload)
@@ -247,6 +274,11 @@ export default handleActions(
             // })
             // console.log(draft.list[0])
         }),
+        [DEL_COMMENT]: (state, action) => produce(state, (draft) => {
+            console.log(state.repls, action.payload)
+
+            draft.repls = state.repls.filter((v) => v.commentId !== action.payload)
+        }),
 
     }, initialState
 )
@@ -266,6 +298,8 @@ const actionCreators = {
     get_commentAX,
     add_comment,
     Add_CommentAX,
+    del_comment,
+    del_commentAX,
 }
 
 export { actionCreators };
