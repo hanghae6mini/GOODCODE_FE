@@ -1,11 +1,13 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
-import Header from "../components/Header";
-import { Grid } from "../elements/ls_index";
+import {BrowserRouter, Route} from "react-router-dom";
 
+import Header from "../components/Header";
 import Login from "../pages/Login";
 import Main from "../pages/Main";
 import SignUp from "../pages/SignUp";
+// 가짜 import
+
+
 
 function App() {
 
@@ -22,5 +24,3 @@ function App() {
 }
 
 export default App;
-
-
