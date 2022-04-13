@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-const ls_Button = (props) => {
+const LsButton = (props) => {
     const {text, _onClick} = props;
     return(
         <React.Fragment>
@@ -11,10 +11,10 @@ const ls_Button = (props) => {
     )
 }
 
-ls_Button.defaultProps = {
+LsButton.defaultProps = {
     text: "텍스트",
     _onClick: () => {}
-}
+};
 
 
 const ElButton = styled.button`
@@ -29,4 +29,4 @@ const ElButton = styled.button`
     width: 60%;
 `;
 
-export default ls_Button;
+export default LsButton;

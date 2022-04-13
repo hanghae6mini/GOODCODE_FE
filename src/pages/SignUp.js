@@ -4,7 +4,10 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
-import { Input, Button, Text, Grid } from "../elements/ls_index";
+import LsGrid from "../elements/LsGrid";
+import LsText from "../elements/LsText";
+import LsInput from "../elements/LsInput.js";
+import LsButton from "../elements/LsButton.js";
 
 import { __SignUp } from "../redux/module/__SignUp";
 
@@ -76,13 +79,13 @@ dispatch(__SignUp({
   };
 return(
   <>
-      <Grid padding="100px 0 0 0">
-        <Text size="30px" bold="600">회원가입</Text>
+      <LsGrid padding="100px 0 0 0">
+        <LsText size="30px" bold="600">회원가입</LsText>
           <form onSubmit={(e) => {
           }}>
             <InputBox>
-            <Text>아이디</Text>
-              <Input
+            <LsText>아이디</LsText>
+              <LsInput
                 name="userid"
                 placeholder="아이디를 입력하세요."
                 type = "text"
@@ -92,8 +95,8 @@ return(
               />
             </InputBox>
             <InputBox>
-            <Text>닉네임</Text>
-              <Input
+            <LsText>닉네임</LsText>
+              <LsInput
                 name="nickname"
                 placeholder="닉네임을 입력하세요."
                 type = "text"
@@ -104,8 +107,8 @@ return(
               />
             </InputBox>
             <InputBox>
-            <Text>비밀번호</Text>
-              <Input
+            <LsText>비밀번호</LsText>
+              <LsInput
                 name="password"
                 placeholder="비밀번호를 입력하세요."
                 type="password"
@@ -115,8 +118,8 @@ return(
               />
             </InputBox>
             <InputBox>
-            <Text>재확인</Text>
-              <Input
+            <LsText>재확인</LsText>
+              <LsInput
                 name="validPassword"
                 placeholder="비밀번호를 다시 입력하세요."
                 type="password"
@@ -127,14 +130,14 @@ return(
             </InputBox>
           </form>
         <Btns>
-          <Button btnName="submit" _onClick={signup} text="회원가입"></Button>
-          <Button
+          <LsButton btnName="submit" _onClick={signup} text="회원가입"></LsButton>
+          <LsButton
             btnName="cancle"
             text="돌아가기"
             _onClick={() => history.push("/")}
-          ></Button>
+          ></LsButton>
         </Btns>
-      </Grid>
+      </LsGrid>
     </>
   )
 }

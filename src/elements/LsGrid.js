@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const ls_Grid = (props) => {
+const LsGrid = (props) => {
     const {is_flex, width, margin ,padding, bg, children } = props;
     const styles = {
         is_flex: is_flex,
@@ -19,7 +19,7 @@ const ls_Grid = (props) => {
     )
 }
 
-ls_Grid.defaultProps = {
+LsGrid.defaultProps = {
     children: null,
     is_flex: true,
     width: "100%",
@@ -38,4 +38,4 @@ const GridBox = styled.div`
     ${(props) => props.is_flex ? `display: flex; flex-flow: column nowrap; align-items: center; justify-content: space-between;`:""}
 `;
 
-export default ls_Grid;
+export default LsGrid;
