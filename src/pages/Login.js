@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Ls_Input, Ls_Button, Ls_Grid, Ls_Text } from "../elements/ls_index";
+
+import LsGrid from "../elements/LsGrid";
+import LsButton from "../elements/LsButton.js";
+import LsInput from "../elements/LsInput.js";
+import LsText from "../elements/LsText";
 
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -46,34 +50,34 @@ const Login = () => {
 
   return (
     <>
-      <Ls_Grid padding="180px 0 0 0">
+      <LsGrid padding="180px 0 0 0">
         <form onSubmit={(e) => {
           e.preventDefault();
           dispatch(__Login(userInfo));
         }}>
-          <Ls_Text size="30px" bold="600">로그인</Ls_Text>
+          <LsText size="30px" bold="600">로그인</LsText>
           <InputBox>
-            <Ls_Text>아이디</Ls_Text>
-            <Ls_Input type="text" name="userid" _onChange={(e) => {
-              setuserid(e.target.value);
-            }} />
+          <LsText>아이디</LsText>
+            <LsInput type="text" name="userid" _onChange={(e) => {
+                  setuserid(e.target.value);
+                }}/>
           </InputBox>
           <InputBox>
-            <Ls_Text>비밀번호</Ls_Text>
-            <Ls_Input type="password" name="password" _onChange={(e) => {
-              setpassword(e.target.value);
-            }} />
+          <LsText>비밀번호</LsText>
+            <LsInput type="password" name="password" _onChange={(e) => {
+                  setpassword(e.target.value);
+                }} />
           </InputBox>
           <Btns>
-            <Ls_Button _onClick={login} text="로그인" />
-            <Ls_Button
+            <LsButton _onClick={login} text="로그인" />
+            <LsButton
               btnName="cancle"
               text="회원가입으로 이동"
               _onClick={() => history.push("/signUp")}
             />
           </Btns>
         </form>
-      </Ls_Grid>
+      </LsGrid>
     </>
   );
 };
