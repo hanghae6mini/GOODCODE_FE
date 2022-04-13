@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Grid, Image, Input, Text } from "../elements";
+import { Button, Grid, Image, Input, Text } from "../elements/index";
 import { actionCreators as FeedActions } from "../redux/modules/feed";
 import { actionCreators as ImageActions } from "../redux/modules/image";
 

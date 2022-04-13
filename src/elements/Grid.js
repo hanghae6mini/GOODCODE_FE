@@ -33,6 +33,7 @@ const Grid = (props) => {
 }
 
 Grid.defaultProps = {
+    header: null,
     children: null,
     flex_space: false,
     width: '100%',
@@ -70,6 +71,7 @@ const GridBox = styled.div`
     ${(props) => props.center ? `text-align: center` : ''};
     ${(props) => props.border ? `border: ${props.border}` : ''};
     
+    ${(props) => props.header ? `top: 0px` : ''}
 `
 
 export default Grid;

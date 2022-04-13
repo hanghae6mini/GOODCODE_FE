@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
-import { Input, Button, Text, Grid } from "../elements/ls_index";
+import { Ls_Input, Ls_Button, Ls_Text, Ls_Grid } from "../elements/ls_index";
 
 import { __SignUp } from "../redux/module/__SignUp";
 
@@ -33,18 +33,18 @@ const SignUp = () => {
 
 
   const signup = () => {
-    
+
 
     if (userid === "" || nickname === "" || password === "" || validPassword === "") {
       window.alert("빈칸을 채워주세요.");
       return;
     };
 
-    if ( password !== validPassword){
+    if (password !== validPassword) {
       window.alert("비밀번호가 일치하지 않습니다.")
     };
 
-// 정규 표현식
+    // 정규 표현식
     // if( userid !== correctuserid ) {
 
     // };
@@ -62,83 +62,82 @@ const SignUp = () => {
     // }
 
 
-  
-dispatch(__SignUp({
-          userId: userid,
-          nickname: nickname,
-          password: password,
-          validPassword: validPassword
-}))
+
+    dispatch(__SignUp({
+      userId: userid,
+      nickname: nickname,
+      password: password,
+      validPassword: validPassword
+    }))
 
 
 
 
   };
-return(
-  <>
-      <Grid padding="100px 0 0 0">
-        <Text size="30px" bold="600">회원가입</Text>
-          <form onSubmit={(e) => {
-          }}>
-            <InputBox>
-            <Text>아이디</Text>
-              <Input
-                name="userid"
-                placeholder="아이디를 입력하세요."
-                type = "text"
-                _onChange={(e) => {
-                  setuserid(e.target.value);
-                }}
-              />
-            </InputBox>
-            <InputBox>
-            <Text>닉네임</Text>
-              <Input
-                name="nickname"
-                placeholder="닉네임을 입력하세요."
-                type = "text"
-                _onChange={(e) => {
-                  setnickname(e.target.value);
-                  console.log(nickname)
-                }}
-              />
-            </InputBox>
-            <InputBox>
-            <Text>비밀번호</Text>
-              <Input
-                name="password"
-                placeholder="비밀번호를 입력하세요."
-                type="password"
-                _onChange={(e) => {
-                  setpassword(e.target.value);
-                }}
-              />
-            </InputBox>
-            <InputBox>
-            <Text>재확인</Text>
-              <Input
-                name="validPassword"
-                placeholder="비밀번호를 다시 입력하세요."
-                type="password"
-                _onChange={(e) => {
-                  setvalidPassword(e.target.value);
-                }}
-              />
-            </InputBox>
-          </form>
+  return (
+    <>
+      <Ls_Grid padding="100px 0 0 0">
+        <Ls_Text size="30px" bold="600">회원가입</Ls_Text>
+        <form onSubmit={(e) => {
+        }}>
+          <InputBox>
+            <Ls_Text>아이디</Ls_Text>
+            <Ls_Input
+              name="userid"
+              placeholder="아이디를 입력하세요."
+              type="text"
+              _onChange={(e) => {
+                setuserid(e.target.value);
+              }}
+            />
+          </InputBox>
+          <InputBox>
+            <Ls_Text>닉네임</Ls_Text>
+            <Ls_Input
+              name="nickname"
+              placeholder="닉네임을 입력하세요."
+              type="text"
+              _onChange={(e) => {
+                setnickname(e.target.value);
+              }}
+            />
+          </InputBox>
+          <InputBox>
+            <Ls_Text>비밀번호</Ls_Text>
+            <Ls_Input
+              name="password"
+              placeholder="비밀번호를 입력하세요."
+              type="password"
+              _onChange={(e) => {
+                setpassword(e.target.value);
+              }}
+            />
+          </InputBox>
+          <InputBox>
+            <Ls_Text>재확인</Ls_Text>
+            <Ls_Input
+              name="validPassword"
+              placeholder="비밀번호를 다시 입력하세요."
+              type="password"
+              _onChange={(e) => {
+                setvalidPassword(e.target.value);
+              }}
+            />
+          </InputBox>
+        </form>
         <Btns>
-          <Button btnName="submit" _onClick={signup} text="회원가입"></Button>
-          <Button
+          <Ls_Button btnName="submit" _onClick={signup} text="회원가입"></Ls_Button>
+          <Ls_Button
             btnName="cancle"
             text="돌아가기"
             _onClick={() => history.push("/")}
-          ></Button>
+          ></Ls_Button>
         </Btns>
-      </Grid>
+      </Ls_Grid>
     </>
   )
 }
-   
+
 
 export default SignUp;
 

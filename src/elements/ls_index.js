@@ -1,6 +1,6 @@
-import Grid from "./ls_Grid";
-import Text from "./ls_Text";
-import Input from "./ls_input";
-import Button from "./ls_Button";
+import Ls_Grid from "./ls_Grid";
+import Ls_Text from "./ls_Text";
+import Ls_Input from "./ls_input";
+import Ls_Button from "./ls_Button";
 
-export {Grid, Text, Input, Button};
+export { Ls_Grid, Ls_Text, Ls_Input, Ls_Button };

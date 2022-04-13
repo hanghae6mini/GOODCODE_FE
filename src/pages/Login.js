@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Input, Button, Grid, Text } from "../elements/ls_index";
+import { Ls_Input, Ls_Button, Ls_Grid, Ls_Text } from "../elements/ls_index";
 
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -9,12 +9,12 @@ import { __Login } from "../redux/module/__Login";
 const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const {userInfo, setUserInfo} = useState({
+  const { userInfo, setUserInfo } = useState({
     userid: "",
     password: ""
   })
 
-  const [userid, setuserid]= useState();
+  const [userid, setuserid] = useState();
   const [password, setpassword] = useState();
 
 
@@ -38,7 +38,7 @@ const Login = () => {
     dispatch(__Login({
       userId: userid,
       password: password,
-      }));
+    }));
   }
 
 
@@ -46,34 +46,34 @@ const Login = () => {
 
   return (
     <>
-      <Grid padding="180px 0 0 0">
+      <Ls_Grid padding="180px 0 0 0">
         <form onSubmit={(e) => {
           e.preventDefault();
           dispatch(__Login(userInfo));
         }}>
-          <Text size="30px" bold="600">로그인</Text>
+          <Ls_Text size="30px" bold="600">로그인</Ls_Text>
           <InputBox>
-          <Text>아이디</Text>
-            <Input type="text" name="userid" _onChange={(e) => {
-                  setuserid(e.target.value);
-                }}/>
+            <Ls_Text>아이디</Ls_Text>
+            <Ls_Input type="text" name="userid" _onChange={(e) => {
+              setuserid(e.target.value);
+            }} />
           </InputBox>
           <InputBox>
-          <Text>비밀번호</Text>
-            <Input type="password" name="password" _onChange={(e) => {
-                  setpassword(e.target.value);
-                }} />
+            <Ls_Text>비밀번호</Ls_Text>
+            <Ls_Input type="password" name="password" _onChange={(e) => {
+              setpassword(e.target.value);
+            }} />
           </InputBox>
           <Btns>
-            <Button _onClick={login} text="로그인" />
-            <Button
+            <Ls_Button _onClick={login} text="로그인" />
+            <Ls_Button
               btnName="cancle"
               text="회원가입으로 이동"
               _onClick={() => history.push("/signUp")}
             />
           </Btns>
         </form>
-      </Grid>
+      </Ls_Grid>
     </>
   );
 };

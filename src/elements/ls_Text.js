@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Text = (props) => {
+const Ls_Text = (props) => {
     const {bold, color, size, children, margin, align} = props;
     
     const styles = {bold: bold, color: color, size: size, margin: margin, align: align};
@@ -11,7 +11,7 @@ const Text = (props) => {
     </P>)
 }
 
-Text.defaultProps= {
+Ls_Text.defaultProps= {
     children: null,
     bold: false,
     color: 'black',
@@ -29,4 +29,4 @@ const P = styled.p`
     ${(props) => (props.margin? `margin: ${props.margin};` : '')}
     `;
 
-export default Text;
+export default Ls_Text;

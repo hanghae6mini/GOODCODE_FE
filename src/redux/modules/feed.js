@@ -3,6 +3,8 @@ import { produce } from 'immer'
 import axios from "axios";
 
 import { actionCreators as ImageActions } from "./image";
+import loginToken from '../module/__Login'
+
 
 
 
@@ -26,7 +28,7 @@ const get_comment = createAction(GET_COMMENT, (comment) => comment)
 const add_comment = createAction(ADD_COMMENT, (comment) => comment)
 const del_comment = createAction(DEL_COMMENT, (comment) => comment)
 
-const testToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJna3J0anMyMDIwIiwibmlja25hbWUiOiLtlZnshKDsnokiLCJpYXQiOjE2NDk4MzAzNTEsImV4cCI6MTY0OTgzMzk1MSwiaXNzIjoiR09PRENPREUifQ.uQQMwGIso_ytTimBIxgJX8fzqptpCZt24dp7Sjh-Oj0'
+const testToken = localStorage.getItem('token')
 
 const config = { 'Authorization': `Bearer ${testToken}` }
 
@@ -44,6 +46,10 @@ const getPostAX = () => {
 
         // const axData = await axios.get('http://localhost:3001/memo')
         // const axData = await axios.get('http://sparta-hs.shop/api/boardlist')
+
+        axios.get(`${initialState.baseURL}/api/user/auth`, { headers: config })
+            .then((res) => console.log(res))
+            .catch((error) => console.log(error))
 
 
         await axios.get(`${initialState.baseURL}/api/feed`,

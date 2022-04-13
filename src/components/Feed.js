@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import React, { useState } from "react";
-import { Button, Grid, Image, Input, Text } from "../elements";
+import { Button, Grid, Image, Input, Text } from "../elements/index";
 import { actionCreators as FeedActions } from "../redux/modules/feed";
 import { useDispatch, useSelector } from "react-redux";
 import Reply from "./Reply";
