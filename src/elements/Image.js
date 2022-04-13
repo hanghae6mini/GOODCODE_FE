@@ -3,11 +3,13 @@ import styled from 'styled-components'
 
 const Image = (props) => {
 
-    const { shape, src, size } = props
+    const { shape, src, size, width, height } = props
 
     const styles = {
-        src, 
+        src,
         size,
+        width,
+        height,
     }
 
     if (shape === 'circle') {
@@ -33,6 +35,8 @@ Image.defaultProps = {
     shape: 'rectangle',
     src: 'http://scuba365.co.kr/web/upload/NNEditor/20160804/copy(1470241074)-02.jpg',
     size: 36,
+    width: '100%',
+    height: '100%',
 }
 
 const Outter = styled.div`
@@ -42,11 +46,20 @@ const Outter = styled.div`
 `
 
 const Inner = styled.div`
-    position: relative;
+    /* position: relative; */
     padding-top: 100%;
+    /* width: ${(props) => props.size}px; */
+    /* height: ${(props) => props.size}px; */
+    /* max-width: 54vw; */
+    /* max-height: 54vh; */
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
     overflow: hidden;
     background-image: url('${(props) => props.src}');
-    background-size: cover;
+    
 `
 
 const ImageCircle = styled.div`
