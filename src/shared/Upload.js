@@ -12,16 +12,10 @@ const Upload = (props) => {
     const [preview, setPreview] = useState(is_uploading)
     const [upPreview, setUpPreview] = useState(props.updating)
 
-    // console.log(is_uploading)
-
     const selecFile = (e) => {
-        // console.log(e);
-
         const reader = new FileReader()
         const file = fileInput.current.files[0]
-
-        console.log(file)
-
+        
         if (file === undefined) {
             return;
         }
@@ -29,8 +23,6 @@ const Upload = (props) => {
         reader.readAsDataURL(file)
 
         reader.onloadend = () => {
-            // console.log(reader.result)
-            // console.log('onload', file)
             if (props.updating) {
                 dispatch(ImageActions.upsetPreview({ preview: reader.result, file }))
             }

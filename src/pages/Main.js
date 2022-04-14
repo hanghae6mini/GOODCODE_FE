@@ -20,14 +20,9 @@ const Main = () => {
     const image = useSelector((state) => state.image)
     const user = useSelector((state) => state.login)
 
-    console.log(user)
-
     const [profile, setProfile] = useState(false)
 
-
     let content = ''
-
-    console.log(feed_list.list, image)
 
     const dispatch = useDispatch()
 
@@ -47,12 +42,11 @@ const Main = () => {
 
     function Feedup() {
         let dic = {
-            userId: 'gkrtjs2020',
+            userId: user.nickname,
             image: image.preview ? image.preview : null,
             content,
         }
 
-        // console.log(dic)
         dispatch(FeedActions.addPostAX(dic))
     }
 
@@ -66,7 +60,7 @@ const Main = () => {
 
     return (
         <React.Fragment>
-            <Grid width='20vw' margin='170px 0px 0px 10px' height='820px' bg='#999' pos='fixed' rad='20px' padding='10px'>
+            <Grid width='20vw' margin='220px 0px 0px 10px' height='760px' bg='#999' pos='fixed' rad='20px' padding='10px'>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                     <Grid><Image shape='rectangle'></Image></Grid>
                     <Text margin='10px' size='20px'>
@@ -81,11 +75,10 @@ const Main = () => {
                             </Grid>
                         </Grid>
 
-                        : <Grid>
-                            <Text margin='10px' size='20px'>
-                                니모니모 스펀지썽
+                        : <Grid flex_col margin='10px'>
+                            <Text size='20px'>
+                                안녕하세요
                             </Text>
-                            <Button width='40px' rad='50px' _onClick={Test}>+</Button>
                         </Grid>
                     }
                 </div>

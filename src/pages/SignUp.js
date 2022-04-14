@@ -93,7 +93,6 @@ return(
                 type = "text"
                 _onChange={(e) => {
                   setnickname(e.target.value);
-                  console.log(nickname)
                 }}
               />
             </InputBox>

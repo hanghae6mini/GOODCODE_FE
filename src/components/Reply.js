@@ -9,16 +9,11 @@ const Reply = ({ data }) => {
 
     const repls = useSelector((state) => state.feed.repls)
 
-    // console.log(repls)
-
     const dispatch = useDispatch()
-
-    // console.log(data)
 
     let repl = ''
 
     const replcomment = () => {
-        console.log(data, repl)
         dispatch(FeedActions.Add_CommentAX(data.feedId, repl))
     }
 

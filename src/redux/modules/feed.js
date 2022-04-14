@@ -76,8 +76,6 @@ const addPostAX = (feed) => {
 
         const formData = new FormData();
 
-        console.log(feed)
-
         if (feed.image)
             formData.append('image', feed.image.file)
         formData.append('userId', feed.userId)
@@ -85,8 +83,6 @@ const addPostAX = (feed) => {
 
         axios.post(`${initialState.baseURL}/api/feed`, formData, { headers: config })
             .then((res) => {
-                console.log(res)
-
                 dispatch(addPost(feed))
                 window.location.reload();
             }).catch((error) => {
@@ -99,8 +95,6 @@ const addPostAX = (feed) => {
 
 const updatePostAX = (feed) => {
     return async function (dispatch, getState, { history }) {
-
-        console.log(feed)
 
         const formData = new FormData();
 
@@ -130,9 +124,6 @@ const updatePostAX = (feed) => {
 const delPostAX = (feed_id) => {
     return async function (dispatch, getState, { history }) {
 
-        console.log((feed_id))
-
-
         axios.delete(`${initialState.baseURL}/api/feed`,
             {
                 headers: config,
@@ -156,15 +147,12 @@ const delPostAX = (feed_id) => {
 const get_commentAX = ({ feedId }) => {
     return async function (dispatch, getState, { history }) {
 
-        console.log(feedId)
-
         axios.get(`${initialState.baseURL}/api/feedcomment`,
             {
                 headers: config,
                 // params: { feedId: feedId }
             })
             .then((res) => {
-                console.log(res)
                 dispatch(get_comment(res.data.result.feed))
             }).catch((error) => {
                 console.log('data : ', error.response.data)
@@ -174,8 +162,6 @@ const get_commentAX = ({ feedId }) => {
 
 const Add_CommentAX = (feedId, repl) => {
     return async function (dispatch, getState, { history }) {
-
-        console.log(feedId, repl)
 
         const formData = new FormData()
 
@@ -190,7 +176,6 @@ const Add_CommentAX = (feedId, repl) => {
                 params: { feedId }
             })
             .then((res) => {
-                console.log(res)
                 dispatch(add_comment({ nickname: user.data.user.nickname, feedId, repl }))
             }).catch((error) => {
                 console.log(error.response.data)
@@ -202,9 +187,13 @@ const Add_CommentAX = (feedId, repl) => {
 
 const up_commentAX = (com) => {
     return function (dispatch, getState, { history }) {
-        console.log(com)
 
-        axios.patch(`${initialState.baseURL}/api/feedcomment`, { comment: com.comment }, { headers: config })
+        console.log(com)
+        axios.patch(`${initialState.baseURL}/api/feedcomment`, { comment: com.comment },
+            {
+                headers: config,
+                params: { commentId: com.commentId }
+            })
             .then((res) => console.log(res))
             .catch((error) => console.log(error))
 
@@ -214,7 +203,6 @@ const up_commentAX = (com) => {
 
 const del_commentAX = (commentId) => {
     return function (dispatch, getState, { history }) {
-        console.log(commentId)
 
         axios.delete(`${initialState.baseURL}/api/feedcomment`,
             {
@@ -236,32 +224,23 @@ const del_commentAX = (commentId) => {
 export default handleActions(
     {
         [GET_POST]: (state, action) => produce(state, (draft) => {
-            // console.log(action)
             // action.payload.post_list.sort((a, b) => (new Date(b.insert_dt).getTime() - new Date(a.insert_dt).getTime()))
             draft.list = action.payload.post_list.data.feedList
         }),
         [ADD_POST]: (state, action) => produce(state, (draft) => {
-            // console.log(action.payload)
             draft.list.unshift(action.payload.post)
         }),
         [UPDATE_POST]: (state, action) => produce(state, (draft) => {
-            console.log(state, action.payload)
-
             let idx = state.list.findIndex((v) => (v.feedId === action.payload.post.feedId))
-            
-            console.log(idx)
 
             if (action.payload.post.image)
                 draft.list[idx] = { ...state.list[idx], feedId: action.payload.post.feedId, content: action.payload.post.content, image: action.payload.post.image.preview }
             else
                 draft.list[idx] = { ...state.list[idx], feedId: action.payload.post.feedId, content: action.payload.post.content }
 
-            console.log(draft.list[idx], action.payload)
         }),
         [DEL_POST]: (state, action) => produce(state, (draft) => {
-            console.log(state, action)
             draft.list = state.list.filter((v) => v.feedId !== action.payload.post)
-            // console.log(draft.list)
         }),
 
 
@@ -271,28 +250,19 @@ export default handleActions(
             // draft.repls = action.payload.feed.filter((v) => v.feedId === action.payload.feedId + '')
         }),
         [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
-            console.log(state.repls, action.payload)
-
             let dic = [...state.repls, { nickname: action.payload.nickname, feedId: action.payload.feedId, comment: action.payload.repl }]
-
-            console.log(dic)
 
             draft.repls = dic
         }),
         [UP_COMMENT]: (state, action) => produce(state, (draft) => {
-            console.log(state.repls, action.payload)
 
             draft.repls = state.repls.map((v) => {
                 if (v.commentId === action.payload.commentId)
                     return { ...v, comment: action.payload.comment }
                 return v
             })
-
-            console.log(draft.repls)
         }),
         [DEL_COMMENT]: (state, action) => produce(state, (draft) => {
-            console.log(state.repls, action.payload)
-
             draft.repls = state.repls.filter((v) => v.commentId !== action.payload)
         }),
 

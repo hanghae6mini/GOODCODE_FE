@@ -11,8 +11,6 @@ const Comment = ({ data }) => {
     const dispatch = useDispatch()
 
     const [commen, setCommen] = useState(false)
-
-    console.log(data)
     
     let changeComment = data.comment
 
@@ -38,9 +36,9 @@ const Comment = ({ data }) => {
                 {commen ?
                     <Grid flex_space width='200vw'>
                         <input defaultValue={data.comment} onChange={e => changeComment = e.target.value} style={{ border: '0px', padding: '12px 4px', boxSizing: 'border-box', resize: 'none' }}></input>
-                        <Button width='30px' margin='0 10px' rad='20px' _onClick={upcomment}></Button>
+                        <Button bg width='20px' margin='0 10px' rad='20px' _onClick={upcomment}>✔️</Button>
                     </Grid>
-                    : <Grid width='100vw'><Text margin='10px 0px'>{data.comment}</Text></Grid>}
+                    : <Grid width='100vw'><Text margin='0 0 0 20px'>{data.comment}</Text></Grid>}
 
                 <Grid flex_space width='50px' margin='0 0 0 10px'>
                     <Button margin='5px 5px' bg width='50px' rad='20px' _onClick={e => upChange()}>🖊️</Button>

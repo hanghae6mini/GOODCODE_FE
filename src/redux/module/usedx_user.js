@@ -105,7 +105,6 @@ const getUserListDB =
       })
       .then((res) => {
         dispatch(getMyList(res.data.entries));
-        console.log(getMyList(res.data.entries));
       });
   };
 

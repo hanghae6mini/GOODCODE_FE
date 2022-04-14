@@ -45,7 +45,6 @@ const Login = () => {
       userId: userid,
       password: password,
     }));
-    history.push("/Main");
   }
 
 
@@ -56,7 +55,6 @@ const Login = () => {
       <LsGrid padding="180px 0 0 0">
         <form onSubmit={(e) => {
           e.preventDefault();
-          dispatch(__Login(userInfo));
         }}>
           <LsText size="30px" bold="600">로그인</LsText>
           <InputBox>

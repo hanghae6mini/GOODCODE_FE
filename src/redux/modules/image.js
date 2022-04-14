@@ -25,25 +25,7 @@ const initialState = {
 const uploadImageAX = (image) => {
     return async function (dispatch, getState, { history }) {
 
-        console.log(image)
-
         dispatch(setPreview(image))
-
-        // const imgref = ref(storage, `images/${image.name}`)
-
-        // // console.log(imgref)
-
-        // await uploadBytesResumable(imgref, image)
-
-        // // console.log(image)
-
-        // let downloadURL = await getDownloadURL(imgref)
-
-        // dispatch(uploadImage(downloadURL))
-
-        // console.log('File available at', downloadURL);
-
-        // dispatch(uploading(false))
     }
 }
 
@@ -58,13 +40,11 @@ export default handleActions({
     [SET_PREVIEW]: (state, action) => produce(state, (draft) => {
         draft.uploading = true
         draft.preview = action.payload.preview
-        // console.log(draft.preview, action)
         draft.uploading = false
     }),
     [UPSET_PREVIEW]: (state, action) => produce(state, (draft) => {
         draft.upuploading = true
         draft.uppreview = action.payload.preview
-        // console.log(draft.uppreview, action.payload)
         // draft.uploading = false
     }),
     [OUT_PREVIEW]: (state, action) => produce(state, (draft) => {

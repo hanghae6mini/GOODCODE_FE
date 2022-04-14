@@ -24,10 +24,19 @@ function login(payload) {
 export const __Login =
   (paylaod) =>
     async (dispatch, getState, { history }) => {
-      const {
-        data: { token },
-      } = await axios.post("http://3.36.89.94/api/user/login", paylaod)
-      localStorage.setItem('token', token)
+
+      let token = ''
+
+      axios.post("http://3.36.89.94/api/user/login", { userId: paylaod.userId, password: paylaod.password })
+        .then((res) => {
+          token = res.data.token
+          localStorage.setItem('token', token)
+          window.alert("로그인 성공");
+          history.push("/main");
+          window.location.reload()
+          // dispatch(login({ userId: res.data.userId, nickname: res.data.nickname }))
+        })
+        .catch((error) => { console.log(error.response.data) })
 
       // cookies.set("myJwt", token, { path: "/" });
       // const { userId, password } = jwt_decode(token);
@@ -37,18 +46,6 @@ export const __Login =
       // 리덕스로 2차 dispatch
       // dispatch(login(paylaod));
 
-      axios.get("http://3.36.89.94/api/user/auth", { headers: { 'Authorization': `Bearer ${token}` } })
-        .then((res) => {
-          console.log(res)
-          history.push("/main");
-          window.alert("로그인 성공");
-          dispatch(login({ userId: res.data.userId, nickname: res.data.nickname }))
-        })
-        .catch(() => {
-          window.alert("로그인 실패.")
-        })
-        ;
-
     };
 
 
@@ -57,11 +54,8 @@ export const auth = () => {
 
     const token = localStorage.getItem('token')
 
-    console.log(token)
-
     axios.get("http://3.36.89.94/api/user/auth", { headers: { 'Authorization': `Bearer ${token}` } })
       .then((res) => {
-        console.log(res)
         dispatch(login({ userId: res.data.userId, nickname: res.data.nickname }))
       })
   }
@@ -74,7 +68,6 @@ export const auth = () => {
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN:
-      console.log(action, action.payload)
       return {
         ...state,
         isLogin: true,

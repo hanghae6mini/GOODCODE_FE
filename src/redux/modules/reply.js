@@ -25,7 +25,6 @@ const Add_CommentAX = (data) => {
 
 export default handleActions({
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
-        console.log(action)
         draft.list.unshift({ [action.payload.id]: { name: action.payload.name, repl: action.payload.repl } })
     }),
 }, initialState,

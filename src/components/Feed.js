@@ -18,8 +18,6 @@ const Feed = (props) => {
 
     let Edit_content = props.data.content
 
-    // console.log(image)
-
     const dispatch = useDispatch()
 
     const setup = () => {
@@ -29,8 +27,6 @@ const Feed = (props) => {
     const updateFeed = () => {
         setReplyBox(false)
         setUpdating(false)
-
-        // console.log(image)
 
         if (image.updating) {
             // let dic = {
@@ -68,23 +64,15 @@ const Feed = (props) => {
             //     image: image.uppreview ? image.uppreview : `${image.baseURL}${props.data.image}`
             // }
         }
-        // console.log(dic)
 
     }
 
     const whatsrc = () => {
 
-        console.log(image, props.image)
-
         let pre = props.image.match(/^(data)/g)
-
-        console.log(pre)
-
-        console.log(updating)
 
         //방금 올린데이터
         if (pre !== null) {
-            console.log(props.data.preview)
             return props.data.preview
         }
 
@@ -92,24 +80,19 @@ const Feed = (props) => {
         if (updating) {
             //방금 올린데이터
             if (pre !== null) {
-                console.log(props.data.preview)
                 return props.data.preview
                 //업로드 할 미리보기
             } else if (image.uppreview) {
-                console.log(image.uppreview.preview)
                 return image.uppreview.preview
             }
             //업로드 할 미리보기
             else {
-                console.log(image.preview)
                 return image.preview
             }
         }
         //업로드 완료가 끝난데이터들
         else {
-            console.log(pre)
             if (pre !== null) {
-                console.log(image.uppreview.preview)
                 return image.uppreview.preview
             }
 
@@ -125,8 +108,6 @@ const Feed = (props) => {
     const reply = () => {
         setReplyBox(!replyBox)
     }
-
-    // console.log(image, props.data)
 
     return (
         <Grid border='3px solid blue' bg='#ddd' rad='20px' margin='0 0 50px 0'>
