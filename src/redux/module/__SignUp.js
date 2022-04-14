@@ -25,7 +25,7 @@ export const __SignUp =
   async (dispatch, getState, { history }) => {
     //네트워크 요청
     console.log(signup)
-    await axios.post("http://3.36.89.94/api/user/signup", signup)
+    await axios.post("https://3.36.89.94/api/user/signup", signup)
       .then(() => {
         window.alert("회원가입 완료");
         history.replace("/");

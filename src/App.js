@@ -15,9 +15,9 @@ function App() {
     <React.Fragment>
       <BrowserRouter>
         <Header></Header>
-        <Route path="/" exact component={Login} />
-        <Route path="/signUp" exact component={SignUp} />
-        <Route path="/main" exact component={Main} />
+        <Route path="/" exact component={Login}/>
+        <Route path="/signUp" exact component={SignUp}/>
+        <Route path="/main" exact component={Main}/>
       </BrowserRouter>
     </React.Fragment>
   );

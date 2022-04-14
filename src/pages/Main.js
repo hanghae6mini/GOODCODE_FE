@@ -7,7 +7,7 @@ import { actionCreators as ImageActions } from "../redux/modules/image";
 import styled from 'styled-components'
 import Feed from "../components/Feed";
 import Upload from "../shared/Upload";
-import Profile from "../components/Profile";
+import Profile from "../components/mainProfile";
 
 
 
@@ -19,6 +19,7 @@ const Main = () => {
     const image = useSelector((state) => state.image)
 
     const [profile, setProfile] = useState(false)
+
 
     let content = ''
 

@@ -14,6 +14,7 @@ const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { userInfo, setUserInfo } = useState({
+    islogin: false,
     userid: "",
     password: ""
   })
@@ -40,9 +41,11 @@ const Login = () => {
     }
 
     dispatch(__Login({
+      isLogin: false,
       userId: userid,
       password: password,
     }));
+    history.push("/Main");
   }
 
 
