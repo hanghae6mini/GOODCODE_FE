@@ -11,6 +11,7 @@ const LOGIN = "login/LOGIN";
 const initialState = {
   isLogin: false,
   userId: "",
+  nickname: "",
   password: "",
 };
 
@@ -40,11 +41,30 @@ export const __Login =
       history.push("/main");
 
       // 리덕스로 2차 dispatch
-      // dispatch(login({ userId: userId, password: password }));
+      // dispatch(login(paylaod));
 
-      axios.get("http://3.36.89.94/api/user/auth", { headers: { 'Authorization': `Bearer ${token}` } }).then((res) => console.log(res))
+      axios.get("http://3.36.89.94/api/user/auth", { headers: { 'Authorization': `Bearer ${token}` } })
+        .then((res) => {
+          console.log(res)
+          dispatch(login({ userId: res.data.userId, nickname: res.data.nickname }))
+        })
     };
 
+
+export const auth = () => {
+  return async function (dispatch, getState, { history }) {
+
+    const token = localStorage.getItem('token')
+
+    console.log(token)
+    
+    axios.get("http://3.36.89.94/api/user/auth", { headers: { 'Authorization': `Bearer ${token}` } })
+    .then((res) => {
+      console.log(res)
+      dispatch(login({ userId: res.data.userId, nickname: res.data.nickname }))
+    })
+  }
+}
 
 
 
@@ -53,11 +73,12 @@ export const __Login =
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN:
+      console.log(action, action.payload)
       return {
         ...state,
         isLogin: true,
+        nickname: action.payload.nickname,
         userId: action.payload.userId,
-        password: action.payload.password,
       };
     default:
       return state;

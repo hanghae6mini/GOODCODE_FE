@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Grid = (props) => {
 
-    const { flex_space, flex_col, width, max_width, height, padding, margin, bg, children, center, pos, _onClick, border } = props
+    const { flex_space, flex_col, width, max_width, height, padding, margin, bg, children, center, pos, _onClick, border, rad } = props
 
     const styles = {
         //flex, align-item : center, justify : space_between
@@ -23,6 +23,7 @@ const Grid = (props) => {
         pos,
         _onClick,
         border,
+        rad,
     }
 
     return (
@@ -46,6 +47,7 @@ Grid.defaultProps = {
     pos: false,
     _onClick: () => { },
     border: false,
+    rad: false,
 }
 
 const GridBox = styled.div`
@@ -70,6 +72,7 @@ const GridBox = styled.div`
     ${(props) => props.pos ? `position: ${props.pos}` : ''}
     ${(props) => props.center ? `text-align: center` : ''};
     ${(props) => props.border ? `border: ${props.border}` : ''};
+    ${(props) => props.rad ? `border-radius: ${props.rad}` : ''};
     
     ${(props) => props.header ? `top: 0px` : ''}
 `

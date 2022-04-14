@@ -4,9 +4,9 @@ import styled from 'styled-components'
 
 const Text = (props) => {
 
-    const { bold, color, size, margin, children } = props
+    const { bold, color, size, width, margin, children } = props
 
-    const styles = { bold, color, size, margin }
+    const styles = { bold, color, size, width, margin }
 
     return (
         <React.Fragment>
@@ -17,6 +17,7 @@ const Text = (props) => {
 
 Text.defaultProps = {
     children: null,
+    width: null,
     margin: '0px',
     bold: false,
     color: '#222831',

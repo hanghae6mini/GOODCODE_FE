@@ -1,27 +1,25 @@
-import React from "react"
+import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Grid, Input, Text } from "../elements";
 import { actionCreators as FeedActions } from "../redux/modules/feed";
 
+import Comment from "./comment";
 
 const Reply = ({ data }) => {
 
     const repls = useSelector((state) => state.feed.repls)
 
-    console.log(repls)
+    // console.log(repls)
 
     const dispatch = useDispatch()
 
-    console.log(data)
+    // console.log(data)
 
     let repl = ''
 
     const replcomment = () => {
-        dispatch(FeedActions.Add_CommentAX({ feedId: data.feedId, content: repl }))
-    }
-
-    const delcomment = (com_id) => {
-        dispatch(FeedActions.del_commentAX(com_id))
+        console.log(data, repl)
+        dispatch(FeedActions.Add_CommentAX(data.feedId, repl))
     }
 
     React.useEffect(() => {
@@ -35,17 +33,11 @@ const Reply = ({ data }) => {
                 <Button width='100px' margin='0 0 0 10px' _onClick={replcomment}>작성</Button>
             </Grid>
 
-            {repls.map((v, i) =>
+            {repls.map((v, i) => v.feedId == data.feedId ?
                 <div key={i} style={{ display: "flex", flexDirection: "row", marginTop: '10px' }}>
-                    <Grid flex_space width='35vw' margin='10px auto'>
-                        <Text>{v.nickname}</Text>
-                        <Text>{v.comment}</Text>
-                    </Grid>
-                    <Grid width='50px' margin='0 0 0 10px'>
-                        <Button width='40px' rad='20px' _onClick={e => delcomment(v.commentId)}>X</Button>
-                    </Grid>
+                    <Comment data={v} />
                 </div>
-            )}
+                : '')}
 
         </Grid>
     )
