@@ -8,7 +8,7 @@ import { auth } from '../redux/module/__Login'
 import styled from 'styled-components'
 import Feed from "../components/Feed";
 import Upload from "../shared/Upload";
-import Profile from "../components/Profile";
+import Profile from "../components/mainProfile";
 
 
 
@@ -23,6 +23,7 @@ const Main = () => {
     console.log(user)
 
     const [profile, setProfile] = useState(false)
+
 
     let content = ''
 

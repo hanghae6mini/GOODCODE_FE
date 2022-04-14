@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import {isEmail, isLength, isAlphanumeric} from 'validator';
 
 import styled from "styled-components";
 import LsGrid from "../elements/LsGrid";
@@ -29,65 +30,55 @@ const SignUp = () => {
   const [password, setpassword] = useState('');
   const [validPassword, setvalidPassword] = useState('');
 
-  // const correctuserid ="" ;
-  // const correctnickname ="" ;
-  // const correctpassword ="" ;
-  // const correctvalidPassword ="" ;
-
 
   const signup = () => {
 
-
+     
+    if (!isAlphanumeric(userid) || !isLength(userid, { min:4, max:16 })){
+      window.alert("아이디는 4~16자의 영문 대소문자와 숫자를 입력해주세요.")
+    }
+    
+    if (!isAlphanumeric(password) || !isLength(password, { min:8, max:16 })){
+      window.alert("비밀번호는 8~16자의 영문 대소문자, 숫자를 입력해주세요.")
+    }
+    
+    if (!isAlphanumeric(nickname) || !isLength(nickname, { min:2, max:10 })){
+      window.alert("닉네임은 2~10자의 영문 대소문자와 숫자를 입력해주세요.")
+    }
+    
+    if (password !== validPassword) {
+      window.alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.")
+    };
+    
     if (userid === "" || nickname === "" || password === "" || validPassword === "") {
       window.alert("빈칸을 채워주세요.");
       return;
     };
-
-    if (password !== validPassword) {
-      window.alert("비밀번호가 일치하지 않습니다.")
-    };
-
-    // 정규 표현식
-    // if( userid !== correctuserid ) {
-
-    // };
-
-    // if ( nickname !== correctnickname ) {
-
-    // };
-
-    // if ( password !== correctpassword ) {
-
-    // };
-
-    // if ( validPassword !== correctvalidPassword ) {
-
-    // }
-
-
-
-    dispatch(__SignUp({
-      userId: userid,
-      nickname: nickname,
+    
+      
+      dispatch(__SignUp({
+        userId: userid,
+        nickname: nickname,
       password: password,
       validPassword: validPassword
     }))
 
-
-
-
   };
+
+
+
 return(
   <>
-      <LsGrid padding="100px 0 0 0">
+      <LsGrid padding="140px 0 0 0">
         <LsText size="30px" bold="600">회원가입</LsText>
           <form onSubmit={(e) => {
           }}>
             <InputBox>
             <LsText>아이디</LsText>
               <LsInput
+
                 name="userid"
-                placeholder="아이디를 입력하세요."
+                placeholder="4~16자의 영문 대소문자와 숫자를 입력."
                 type = "text"
                 _onChange={(e) => {
                   setuserid(e.target.value);
@@ -98,7 +89,7 @@ return(
             <LsText>닉네임</LsText>
               <LsInput
                 name="nickname"
-                placeholder="닉네임을 입력하세요."
+                placeholder="2~10자의 영문 대소문자와 숫자를 입력."
                 type = "text"
                 _onChange={(e) => {
                   setnickname(e.target.value);
@@ -110,7 +101,7 @@ return(
             <LsText>비밀번호</LsText>
               <LsInput
                 name="password"
-                placeholder="비밀번호를 입력하세요."
+                placeholder="8~16자의 영문 대소문자, 숫자, 특수문자를 입력."
                 type="password"
                 _onChange={(e) => {
                   setpassword(e.target.value);

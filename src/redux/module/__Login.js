@@ -27,9 +27,6 @@ export const __Login =
       const {
         data: { token },
       } = await axios.post("http://3.36.89.94/api/user/login", paylaod)
-
-      console.log(token);
-
       localStorage.setItem('token', token)
 
       // cookies.set("myJwt", token, { path: "/" });
@@ -37,17 +34,21 @@ export const __Login =
       // cookies.set("userId", userId, { path: "/" });
       // cookies.set("password", password, { path: "/" });
 
-      // 메인페이지로 이동시킴
-      history.push("/main");
-
       // 리덕스로 2차 dispatch
       // dispatch(login(paylaod));
 
       axios.get("http://3.36.89.94/api/user/auth", { headers: { 'Authorization': `Bearer ${token}` } })
         .then((res) => {
           console.log(res)
+          history.push("/main");
+          window.alert("로그인 성공");
           dispatch(login({ userId: res.data.userId, nickname: res.data.nickname }))
         })
+        .catch(() => {
+          window.alert("로그인 실패.")
+        })
+        ;
+
     };
 
 
@@ -57,12 +58,12 @@ export const auth = () => {
     const token = localStorage.getItem('token')
 
     console.log(token)
-    
+
     axios.get("http://3.36.89.94/api/user/auth", { headers: { 'Authorization': `Bearer ${token}` } })
-    .then((res) => {
-      console.log(res)
-      dispatch(login({ userId: res.data.userId, nickname: res.data.nickname }))
-    })
+      .then((res) => {
+        console.log(res)
+        dispatch(login({ userId: res.data.userId, nickname: res.data.nickname }))
+      })
   }
 }
 
@@ -83,12 +84,9 @@ const loginReducer = (state = initialState, action) => {
     default:
       return state;
   };
+  // main render
 };
 
-// case LOG_OUT:
-//   return {};
-// default:
-//   return state;
 
 
 export default loginReducer;
