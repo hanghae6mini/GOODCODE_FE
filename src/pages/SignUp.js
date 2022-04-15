@@ -69,7 +69,7 @@ const SignUp = () => {
 
 return(
   <>
-      <LsGrid padding="140px 0 0 0">
+      <LsGrid padding="140px 0 0 0" margin='100px 0 0 0'>
         <LsText size="30px" bold="600">회원가입</LsText>
           <form onSubmit={(e) => {
           }}>

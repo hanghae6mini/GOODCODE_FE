@@ -15,6 +15,8 @@ const Upload = (props) => {
     const selecFile = (e) => {
         const reader = new FileReader()
         const file = fileInput.current.files[0]
+
+        console.log(file)
         
         if (file === undefined) {
             return;

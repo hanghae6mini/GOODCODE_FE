@@ -4,12 +4,12 @@ import LsGrid from "../elements/LsGrid"
 import LsText from "../elements/LsText"
 
 const LsInput = (props) => {
-    const {label, placeholder, _onChange} = props;
+    const {label, placeholder, _onChange, type} = props;
     return (
         <React.Fragment>
             <LsGrid>
                 <LsText margin="0px">{label}</LsText>
-                <ElInput placeholder={placeholder} onChange={_onChange}/>
+                <ElInput type={type} placeholder={placeholder} onChange={_onChange}/>
             </LsGrid>
         </React.Fragment>
     )

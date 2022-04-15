@@ -52,7 +52,7 @@ const Login = () => {
 
   return (
     <>
-      <LsGrid padding="180px 0 0 0">
+      <LsGrid padding="180px 0 0 0" margin='100px 0 0 0'>
         <form onSubmit={(e) => {
           e.preventDefault();
         }}>

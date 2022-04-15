@@ -28,9 +28,10 @@ export const __SignUp =
       .then(() => {
         window.alert("회원가입 완료");
         history.replace("/");
+        window.location.reload()
       })
       .catch((err) => {
-        window.alert(err);
+        console.log(err)
       });
   };
 
